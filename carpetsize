@@ -1,0 +1,30 @@
+import math
+
+m = int(input("Please enter the minimum number of squares you would accept: "))
+n = int(input("Please enter the maximum number of squares you would accept: "))
+
+def findMaxFactors(num):
+    l = 1
+    b = num
+    for i in range(math.ceil(math.sqrt(n)),0, -1):
+        if num%i == 0:
+            if (num/i <= i):
+                l = num//i
+                b = i
+            else:
+                l = i
+                b = num//i
+            break
+    return l,b
+
+l = 1
+b = m
+for i in range(n,m-1,-1):
+    tempL,tempB = findMaxFactors(i)
+    if tempB - tempL < b - l:
+        l = tempL
+        b = tempB
+        if l-b == 0:
+            break
+
+print (l,b)
